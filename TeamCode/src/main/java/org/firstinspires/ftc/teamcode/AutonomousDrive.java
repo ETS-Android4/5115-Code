@@ -31,7 +31,7 @@ public class AutonomousDrive extends LinearOpMode {
         //TESTING THING
         waitForStart();
         drive(12, 0.5);
-        sleep(2000);
+        sleep(1000);
         halt();
         sleep(1000);
         endMotion();
