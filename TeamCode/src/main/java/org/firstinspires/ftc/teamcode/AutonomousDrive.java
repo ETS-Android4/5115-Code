@@ -29,8 +29,11 @@ public class AutonomousDrive extends LinearOpMode {
         spinner = hardwareMap.get(DcMotor.class, "spinner");
 
         //TESTING THING
-
+        waitForStart();
         drive(12, 0.5);
+        sleep(2000);
+        halt();
+        sleep(1000);
         endMotion();
 
     }
@@ -49,7 +52,7 @@ public class AutonomousDrive extends LinearOpMode {
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        right.setTargetPosition((int)- DesiredPos);
+        right.setTargetPosition((int) DesiredPos);
         left.setTargetPosition((int) -DesiredPos);
 
         right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -71,7 +74,7 @@ public class AutonomousDrive extends LinearOpMode {
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         right.setTargetPosition((int) DesiredPos);
-        left.setTargetPosition((int) DesiredPos);
+        left.setTargetPosition((int) -DesiredPos);
 
         right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -174,7 +177,31 @@ public class AutonomousDrive extends LinearOpMode {
         }
     }
 
-    //Resets the encoder values
+    //quickly stops
+    public void halt() {
+        int Inches = 1;
+        int Speed = 1;
+
+        double Diameter = 6.28;
+        double EncoderTurns = 288;
+        double DesiredPos = Inches * EncoderTurns / Diameter;
+
+        resetEncoders();
+        right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        right.setTargetPosition((int) DesiredPos);
+        left.setTargetPosition((int) -DesiredPos);
+
+        right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        right.setPower(Speed);
+        left.setPower(Speed);
+    }
+
+
+        //Resets the encoder values
     public void resetEncoders() {
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

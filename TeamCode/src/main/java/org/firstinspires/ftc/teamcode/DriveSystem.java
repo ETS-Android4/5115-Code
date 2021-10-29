@@ -48,25 +48,23 @@ public class DriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
 
+            //space where slowing code will go
+            if (gamepad1.left_bumper) {
+                leftSpeed = 0.5;
+                rightSpeed = 0.5;
+                telemetry.addData("Speed", "Slow");
+            } else {
+                leftSpeed = 1;
+                rightSpeed = 1;
+                telemetry.addData("Speed", "Fast");
+            }
+            telemetry.update();
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
             rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
-
-            //space where slowing code will go
-            if (gamepad1.left_bumper) {
-                leftSpeed = 0.5;
-                rightSpeed = 0.5;
-                telemetry.addData("Speed", "Slow");
-                telemetry.update();
-            } else {
-                leftSpeed = 1;
-                rightSpeed = 1;
-                telemetry.addData("Speed", "Fast");
-                telemetry.update();
-            }
 
 
             // Send calculated power to wheels
