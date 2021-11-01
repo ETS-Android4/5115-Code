@@ -76,8 +76,8 @@ public class DriveSystem extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            left.setPower(leftPower);
-            right.setPower(rightPower);
+            left.setPower(-leftPower);
+            right.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
 
 
