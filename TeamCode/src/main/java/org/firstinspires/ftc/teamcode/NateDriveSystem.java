@@ -53,14 +53,7 @@ public class NateDriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
 
-
-            // POV Mode uses left stick to go forward, and right stick to turn.
-            double drive = -gamepad1.left_stick_y;
-            double turn = gamepad1.right_stick_x;
-            leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
-            rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
-
-            //space where slowing code will go
+            //slowing code
             if (gamepad1.left_bumper) {
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
@@ -75,7 +68,11 @@ public class NateDriveSystem extends LinearOpMode {
 
             }
 
-
+            // POV Mode uses left stick to go forward, and right stick to turn.
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
+            leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
+            rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
 
 
             // Send calculated power to wheels
