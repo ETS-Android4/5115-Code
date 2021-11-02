@@ -53,17 +53,37 @@ public class DriveSystem extends LinearOpMode {
             double spinnerSpeed = 0;
 
             //space where slowing code will go
-            if (gamepad1.left_bumper) {
+            if (gamepad1.left_bumper && gamepad1.a) {
+                spinner.setDirection(DcMotor.Direction.FORWARD);
+                leftSpeed = 0.5;
+                rightSpeed = 0.5;
+                spinnerSpeed = 1;
+                telemetry.addData("Spinner", "On and Front Spinning");
+                telemetry.addData("Speed", "Slow");
+            } if (gamepad1.left_bumper && gamepad1.b) {
+                spinner.setDirection(DcMotor.Direction.REVERSE);
+                leftSpeed = 0.5;
+                rightSpeed = 0.5;
+                spinnerSpeed = 1;
+                telemetry.addData("Spinner", "On and Front Spinning");
+                telemetry.addData("Speed", "Slow");
+            } else if (gamepad1.left_bumper) {
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
                 telemetry.addData("Speed", "Slow");
             } else if (gamepad1.a) {
+                spinner.setDirection(DcMotor.Direction.FORWARD);
                 spinnerSpeed = 1;
-                telemetry.addData("Spinner", "On");
+                telemetry.addData("Spinner", "On and Front Spinning");
+            } else if (gamepad1.b) {
+                spinner.setDirection(DcMotor.Direction.REVERSE);
+                spinnerSpeed = 1;
+                telemetry.addData("Spinner", "On and Back Spinning");
             } else {
                 leftSpeed = 1;
                 rightSpeed = 1;
                 spinnerSpeed = 0;
+                spinner.setDirection(DcMotor.Direction.FORWARD);
                 telemetry.addData("Speed", "Fast");
             }
             telemetry.update();
