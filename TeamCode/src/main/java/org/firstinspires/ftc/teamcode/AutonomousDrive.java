@@ -30,7 +30,9 @@ public class AutonomousDrive extends LinearOpMode {
 
         //TESTING THING
         waitForStart();
-        drive(12, 0.5);
+        drive(30, 0.5);
+        //sleep(1000);
+        reverse(90, 0.5);
 
     }
     /*
@@ -80,7 +82,7 @@ public class AutonomousDrive extends LinearOpMode {
         left.setPower(Speed);
     }
     //Makes the robot turn right for x inches at y speed
-    public void rightDirection(double Inches , double Speed) {
+    public void rightDirection (double Inches , double Speed) {
 
         double Diameter = 6.28;
         double EncoderTurns = 288;
@@ -162,15 +164,15 @@ public class AutonomousDrive extends LinearOpMode {
 
         sleep(SleepTime);
 
-        if (position == "ON") {
+        if (position == "CLOCKWISE") {
             spinner.setPower(-.5);
-            sleep(300);
+            sleep(1000);
 
-        } else if (position == "OFF") {
+        } else if (position == "COUNTERCLOCKWISE") {
             spinner.setPower(.5);
-            sleep(400);
+            sleep(1000);
+        } else {
             spinner.setPower(0);
-
         }
     }
 
@@ -196,8 +198,6 @@ public class AutonomousDrive extends LinearOpMode {
         right.setPower(Speed);
         left.setPower(Speed);
     }
-
-
         //Resets the encoder values
     public void resetEncoders() {
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

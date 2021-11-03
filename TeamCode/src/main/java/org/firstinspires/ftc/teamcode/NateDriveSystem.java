@@ -76,10 +76,10 @@ public class NateDriveSystem extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            left1.setPower(-leftPower);
-            right1.setPower(rightPower);
+            left1.setPower(leftPower);
+            right1.setPower(-rightPower);
             left2.setPower(-leftPower);
-            right2.setPower(rightPower);
+            right2.setPower(-rightPower);
 
 
             // Show the elapsed game time and wheel power.
