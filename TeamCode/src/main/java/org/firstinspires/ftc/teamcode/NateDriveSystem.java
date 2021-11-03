@@ -27,10 +27,10 @@ public class NateDriveSystem extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        left1 = hardwareMap.get(DcMotor.class, "left1");
-        right1 = hardwareMap.get(DcMotor.class, "right1");
-        left2 = hardwareMap.get(DcMotor.class, "left2");
-        right2 = hardwareMap.get(DcMotor.class, "right2");
+        left1 = hardwareMap.get(DcMotor.class, "left-1");
+        right1 = hardwareMap.get(DcMotor.class, "right-1");
+        left2 = hardwareMap.get(DcMotor.class, "left-2");
+        right2 = hardwareMap.get(DcMotor.class, "right-2");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -76,9 +76,9 @@ public class NateDriveSystem extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            left1.setPower(leftPower);
+            left1.setPower(-leftPower);
             right1.setPower(rightPower);
-            left2.setPower(leftPower);
+            left2.setPower(-leftPower);
             right2.setPower(rightPower);
 
 

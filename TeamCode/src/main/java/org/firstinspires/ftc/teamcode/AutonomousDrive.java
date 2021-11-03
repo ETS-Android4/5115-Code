@@ -31,10 +31,6 @@ public class AutonomousDrive extends LinearOpMode {
         //TESTING THING
         waitForStart();
         drive(12, 0.5);
-        sleep(1000);
-        halt();
-        sleep(1000);
-        endMotion();
 
     }
     /*
@@ -60,6 +56,7 @@ public class AutonomousDrive extends LinearOpMode {
 
         right.setPower(Speed);
         left.setPower(Speed);
+
     }
 
     //Goes reverse x inches for y speed
@@ -190,8 +187,8 @@ public class AutonomousDrive extends LinearOpMode {
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        right.setTargetPosition((int) DesiredPos);
-        left.setTargetPosition((int) -DesiredPos);
+        right.setTargetPosition((int) -DesiredPos);
+        left.setTargetPosition((int) DesiredPos);
 
         right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
