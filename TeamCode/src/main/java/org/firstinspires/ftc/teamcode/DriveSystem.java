@@ -15,8 +15,8 @@ public class DriveSystem extends LinearOpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
-    private DcMotor left = null;
-    private DcMotor right = null;
+    private DcMotor leftDrive = null;
+    private DcMotor rightDrive = null;
     private DcMotor spinner = null;
 
     @Override
@@ -27,14 +27,14 @@ public class DriveSystem extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        left = hardwareMap.get(DcMotor.class, "left");
-        right = hardwareMap.get(DcMotor.class, "right");
+        leftDrive = hardwareMap.get(DcMotor.class, "left");
+        rightDrive = hardwareMap.get(DcMotor.class, "right");
         spinner = hardwareMap.get(DcMotor.class, "spinner");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        left.setDirection(DcMotor.Direction.FORWARD);
-        right.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
         spinner.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
@@ -57,14 +57,14 @@ public class DriveSystem extends LinearOpMode {
                 spinner.setDirection(DcMotor.Direction.FORWARD);
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
-                spinnerSpeed = 1;
+                spinnerSpeed = 0.5;
                 telemetry.addData("Spinner", "On and Front Spinning");
                 telemetry.addData("Speed", "Slow");
             } if (gamepad1.left_bumper && gamepad1.b) {
                 spinner.setDirection(DcMotor.Direction.REVERSE);
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
-                spinnerSpeed = 1;
+                spinnerSpeed = 0.5;
                 telemetry.addData("Spinner", "On and Front Spinning");
                 telemetry.addData("Speed", "Slow");
             } else if (gamepad1.left_bumper) {
@@ -73,11 +73,11 @@ public class DriveSystem extends LinearOpMode {
                 telemetry.addData("Speed", "Slow");
             } else if (gamepad1.a) {
                 spinner.setDirection(DcMotor.Direction.FORWARD);
-                spinnerSpeed = 1;
+                spinnerSpeed = 0.5;
                 telemetry.addData("Spinner", "On and Front Spinning");
             } else if (gamepad1.b) {
                 spinner.setDirection(DcMotor.Direction.REVERSE);
-                spinnerSpeed = 1;
+                spinnerSpeed = 0.5;
                 telemetry.addData("Spinner", "On and Back Spinning");
             } else {
                 leftSpeed = 1;
@@ -96,8 +96,8 @@ public class DriveSystem extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            left.setPower(-leftPower);
-            right.setPower(-rightPower);
+            leftDrive.setPower(-leftPower);
+            rightDrive.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
 
 
