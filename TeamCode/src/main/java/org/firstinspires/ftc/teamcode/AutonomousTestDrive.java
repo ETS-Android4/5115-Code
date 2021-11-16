@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Autonomous Drive", group="HardwarePushbot")
+@Autonomous(name="Autonomous Test Drive", group="HardwarePushbot")
 
 public class AutonomousTestDrive extends LinearOpMode {
 
