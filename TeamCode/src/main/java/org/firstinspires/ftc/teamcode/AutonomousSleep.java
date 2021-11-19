@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+@Autonomous(name="AutonomousSleepy", group="Autonomous")
 
 public class AutonomousSleep extends LinearOpMode {
 
@@ -38,16 +41,17 @@ public class AutonomousSleep extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        Spinner("right", 2000, 1);
 
     }
     public void Forward(long sleeptime, double power) {
 
-        leftDrive.setPower(-power);
-        rightDrive.setPower(-power);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
         sleep(sleeptime);
 
-        leftDrive.setPower(1);
-        rightDrive.setPower(1);
+        leftDrive.setPower(-power);
+        rightDrive.setPower(-power);
 
         sleep(50);
 
@@ -58,12 +62,12 @@ public class AutonomousSleep extends LinearOpMode {
     }
     public void Reverse(long sleeptime, double power) {
 
-        leftDrive.setPower(power);
-        rightDrive.setPower(power);
+        leftDrive.setPower(-power);
+        rightDrive.setPower(-power);
         sleep(sleeptime);
 
-        leftDrive.setPower(-1);
-        rightDrive.setPower(-1);
+        leftDrive.setPower(power);
+        rightDrive.setPower(power);
 
         sleep(50);
 
@@ -73,7 +77,7 @@ public class AutonomousSleep extends LinearOpMode {
     }
     public void Turn(String direction, long sleeptime, double power) {
         if (direction == "right") {
-            leftDrive.setPower(0);
+            leftDrive.setPower(-power);
             rightDrive.setPower(power);
             sleep(sleeptime);
 
@@ -81,7 +85,7 @@ public class AutonomousSleep extends LinearOpMode {
             rightDrive.setPower(0);
         } else if (direction == "left") {
             leftDrive.setPower(power);
-            rightDrive.setPower(0);
+            rightDrive.setPower(-power);
             sleep(sleeptime);
 
             leftDrive.setPower(0);
@@ -92,7 +96,24 @@ public class AutonomousSleep extends LinearOpMode {
             telemetry.addData("Error Log", "typo in Turn() function");
         }
     }
-    public void TurnLeft (long sleeptime, double power) {
+    public void Spinner(String direction, long sleeptime, double power) {
+        if (direction == "right") {
+            spinner.setPower(-power);
+            sleep(sleeptime);
+
+            spinner.setPower(0);
+        } else if (direction == "left") {
+            spinner.setPower(power);
+            sleep(sleeptime);
+
+            spinner.setPower(0);
+        } else {
+            spinner.setPower(0);
+            telemetry.addData("Error Log", "typo in Spinner() function");
+        }
+    }
+    public void Wait() {
+        sleep(500);
     }
 
 }
