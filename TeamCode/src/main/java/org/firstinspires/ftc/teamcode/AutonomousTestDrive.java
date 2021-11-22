@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Autonomous Test Drive", group="HardwarePushbot")
+@Autonomous(name="Autonomous Test Drive", group="HardwarePushbotTest")
 
 public class AutonomousTestDrive extends LinearOpMode {
 
@@ -49,18 +49,13 @@ public class AutonomousTestDrive extends LinearOpMode {
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        newPos = robot.leftDrive.getCurrentPosition();
-        if(newPos!=pastPos){
-            ticks+=1;
 
-        }
-        pastPos = newPos;
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Path0",  "Starting at %7d :%7d",
                 robot.leftDrive.getCurrentPosition(),
-                robot.rightDrive.getCurrentPosition(),
-                ticks);
+                robot.rightDrive.getCurrentPosition()
+                );
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -120,11 +115,20 @@ public class AutonomousTestDrive extends LinearOpMode {
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
 
+                //math for current pos
+                newPos = robot.leftDrive.getCurrentPosition();
+                if(newPos!=pastPos){
+                    ticks+=1;
+
+                }
+                pastPos = newPos;
+
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Running at %7d :%7d",
                         robot.leftDrive.getCurrentPosition(),
                         robot.rightDrive.getCurrentPosition());
+                telemetry.addData("CurrentPos: ",ticks);
                 telemetry.update();
             }
 
