@@ -8,7 +8,7 @@ public class EncoderTest extends LinearOpMode {
     DcMotor motor;
 
     public void runOpMode(){
-        motor = hardwareMap.dcMotor.get("left_drive");
+        motor = hardwareMap.dcMotor.get("left");
         motor.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
