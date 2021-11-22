@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -22,20 +23,28 @@ public class EncoderTest extends LinearOpMode {
 
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        int pos = motor.getCurrentPosition();
-        int targetPos = motor.getTargetPosition();
-        telemetry.addData("Encoder Pos: ", pos);
-        telemetry.addData("Target Pos:", targetPos);
-        telemetry.update();
+
+        while(opModeIsActive()){
+            int pos = motor.getCurrentPosition();
+            int targetPos = motor.getTargetPosition();
+            telemetry.addData("Encoder Pos: ", pos);
+            telemetry.addData("Target Pos:", motor.getTargetPosition());
+            telemetry.update();
+
+
+            if(pos>= targetPos){
+                motor.setPower(0);
+                sleep(500); //wait for motor to come to a stop
+                motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            }
+        }
 
 
 
 
 
 
-
-
-        sleep(2000);
+//        sleep(2000);
 
 
 
