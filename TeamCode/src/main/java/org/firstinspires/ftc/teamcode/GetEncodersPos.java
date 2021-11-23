@@ -107,15 +107,19 @@ public class GetEncodersPos extends LinearOpMode {
             leftDrive.setPower(-leftPower);
             rightDrive.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
-            int pos = leftDrive.getCurrentPosition();
+            int leftPos = leftDrive.getCurrentPosition();
+            int rightPos = rightDrive.getCurrentPosition();
 
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            telemetry.addData("leftPos", pos);
+            telemetry.addData("Encoder Positions", "Left: "+leftPos+" | Right: "+rightPos);
             telemetry.addData("Motor status", status);
             telemetry.update();
+
+
+            //with current encoders, a 90 degree turn is 1000 ticks
         }
     }
 }

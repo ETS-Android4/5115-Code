@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+//@Disabled
 @Autonomous(name = "test System", group = "Linear Opmode")
 public class EncoderTest extends LinearOpMode {
     DcMotor motor;
