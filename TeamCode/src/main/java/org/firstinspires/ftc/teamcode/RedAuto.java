@@ -31,7 +31,7 @@ public class RedAuto extends LinearOpMode{
         waitForStart();
 
         encoders(250,250,"Forward 1");
-        encoders(-900,900,"left turn");
+        encoders(-1000,1000,"left turn");
         encoders(1800,1800,"forward 2");
         encoders(100,100,"fixing");
         spinner.setPower(0.4);
@@ -43,6 +43,14 @@ public class RedAuto extends LinearOpMode{
         spinner.setPower(0);
         left.setPower(0);
         right.setPower(0);
+
+        encoders(-500,-500, "reverse1");
+        encoders(-500,500,"turn");
+        encoders(-1000,-1000,"reverse");
+        encoders(400,-400,"turn");
+        encoders(-4000,-4000,"reverse to warehouse");
+
+
         telemetry.addData("Status","finished");
         telemetry.update();
         sleep(5000);
