@@ -89,7 +89,7 @@ public class RedAuto extends LinearOpMode{
 
             while (opModeIsActive() && left.isBusy() && right.isBusy()){
                 telemetry.addData("Status", status);
-                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+" | Right: "+right.getCurrentPosition());
+                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"Right: "+right.getCurrentPosition());
                 telemetry.update();
                 idle();
             }
