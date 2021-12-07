@@ -5,10 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-<<<<<<< HEAD
 @Autonomous(name = "Blue Auto 1", group = "Linear Opmode")
 
-public class BlueAuto extends LinearOpMode{
+public class BlueAuto extends LinearOpMode {
     DcMotor left;
     DcMotor right;
     DcMotor spinner;
@@ -58,8 +57,8 @@ public class BlueAuto extends LinearOpMode{
     }
 
 
-    public void encoders(int targetLeft, int targetRight,String status){
-        if(opModeIsActive()){
+    public void encoders(int targetLeft, int targetRight, String status) {
+        if (opModeIsActive()) {
             left.setTargetPosition(targetLeft);
             right.setTargetPosition(targetRight);
             left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -68,49 +67,15 @@ public class BlueAuto extends LinearOpMode{
             left.setPower(speed);
             right.setPower(speed);
 
-            while (opModeIsActive() && left.isBusy() && right.isBusy()){
+            while (opModeIsActive() && left.isBusy() && right.isBusy()) {
                 telemetry.addData("Status", status);
-                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+" | Right: "+right.getCurrentPosition());
+                telemetry.addData("Encoder Position", "Left: " + left.getCurrentPosition() + " | Right: " + right.getCurrentPosition());
                 telemetry.update();
                 idle();
             }
 
             left.setPower(0);
             right.setPower(0);
-=======
-public class BlueAuto {
-
-    @Autonomous(name = "Blue Auto 1", group = "Linear Opmode")
-    public class RedAuto extends LinearOpMode {
-        DcMotor left;
-        DcMotor right;
-        DcMotor spinner;
-        boolean ran = false;
-
-        double speed = 0.6;
-
-        public void runOpMode() {
-            left = hardwareMap.dcMotor.get("left");
-            right = hardwareMap.dcMotor.get("right");
-            spinner = hardwareMap.dcMotor.get("spinner");
-            left.setDirection(DcMotor.Direction.REVERSE);
-            spinner.setDirection(DcMotorSimple.Direction.REVERSE);
->>>>>>> origin/master
-
-            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-<<<<<<< HEAD
-            sleep(1000);
-        }
-
-    }
-}
-=======
-
-            waitForStart();
         }
     }
-
 }
->>>>>>> origin/master
