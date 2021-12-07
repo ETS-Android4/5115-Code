@@ -36,7 +36,7 @@ public class RedAuto extends LinearOpMode{
         waitForStart();
 
         encoders(250,250,"Forward 1");
-        encoders(-1000,1000,"left turn");
+        encoders(-900,900,"left turn");
         encoders(1800,1800,"forward 2");
         encoders(100,100,"fixing");
         spinner.setPower(0.4);
