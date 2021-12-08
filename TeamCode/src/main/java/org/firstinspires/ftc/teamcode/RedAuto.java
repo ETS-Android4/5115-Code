@@ -36,9 +36,9 @@ public class RedAuto extends LinearOpMode{
         waitForStart();
 
         encoders(250,250,"Forward 1");
-        encoders(-900,900,"left turn");
+        encoders(-700,700,"left turn");
         encoders(1800,1800,"forward 2");
-        encoders(100,100,"fixing");
+        encoders(-100,-100,"fixing");
         spinner.setPower(0.4);
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -52,7 +52,7 @@ public class RedAuto extends LinearOpMode{
         encoders(-500,-500, "reverse1");
         encoders(-500,500,"turn");
         encoders(-1000,-1000,"reverse");
-        encoders(400,-400,"turn");
+        encoders(500,-500,"turn");
         encoders(-4000,-4000,"reverse to warehouse");
 
 
@@ -79,6 +79,8 @@ public class RedAuto extends LinearOpMode{
 
     public void encoders(int targetLeft, int targetRight,String status){
         if(opModeIsActive()){
+            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             left.setTargetPosition(targetLeft);
             right.setTargetPosition(targetRight);
             left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
