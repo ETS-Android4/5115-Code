@@ -20,6 +20,8 @@ public class DriveSystem extends LinearOpMode {
     private DcMotor rightDrive = null;
     private DcMotor spinner = null;
     private DcMotor arm = null;
+    private Servo leftClaw = null;
+    private Servo rightClow = null;
     private String status = "No status";
     private String speed = "No value";
 
