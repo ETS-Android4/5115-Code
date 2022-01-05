@@ -21,15 +21,16 @@ public class DriveSystem extends LinearOpMode {
     private DcMotor spinner = null;
     private DcMotor arm = null;
     private Servo leftClaw = null;
-    private Servo rightClow = null;
+    private Servo rightClaw = null;
     private String status = "No status";
     private String speed = "No value";
 
 
     @Override
     public void runOpMode() {
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
+
+
+
 
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
@@ -38,6 +39,14 @@ public class DriveSystem extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right");
         spinner = hardwareMap.get(DcMotor.class, "spinner");
         arm = hardwareMap.get(DcMotor.class, "arm");
+        leftClaw = hardwareMap.get(Servo.class, "leftClaw");
+        rightClaw = hardwareMap.get(Servo.class, "rightClaw");
+
+        rightClaw.setPosition(0);
+        leftClaw.setPosition(0);
+
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -60,6 +69,11 @@ public class DriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
             double spinnerSpeed = 0;
+            //variable for claw position
+            double lcPos = leftClaw.getPosition(); //Setting left Claw position
+            double rcPos = rightClaw.getPosition(); //Setting Right Claw position
+
+
 
             //space where slowing code will go
             if(gamepad1.y){
@@ -128,7 +142,7 @@ public class DriveSystem extends LinearOpMode {
                 status = "arm down";
             }
             if(gamepad1.dpad_right){
-                //open claw
+                leftClaw.setPosition(lcPos += 0.1);
             }else if(gamepad1.dpad_left){
                 //close claw
             } else{
