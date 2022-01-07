@@ -140,12 +140,12 @@ public class DriveSystemRevised extends LinearOpMode {
             if (gamepad1.dpad_up) {
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
-                arm.setPower(0.75);
+                arm.setPower(1);
                 status = "arm up";
             } else if (gamepad1.dpad_down) {
                 //move claw down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
-                arm.setPower(0.75);
+                arm.setPower(1);
                 status = "arm down";
             } else {
                 arm.setPower(0);
