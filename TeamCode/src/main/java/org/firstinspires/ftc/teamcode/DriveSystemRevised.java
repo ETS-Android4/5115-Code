@@ -10,9 +10,9 @@ import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name = "Drive System", group = "Linear Opmode")
+@TeleOp(name = "Better Drive System", group = "Linear Opmode")
 //@Disabled
-public class DriveSystem extends LinearOpMode {
+public class DriveSystemRevised extends LinearOpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
@@ -22,14 +22,14 @@ public class DriveSystem extends LinearOpMode {
     private DcMotor arm = null;
     private Servo leftClaw = null;
     private Servo rightClaw = null;
-    private String status = "No status";
+    private String status = "Off";
     private String speed = "No value";
-
+    private double posLeft = 1;
+    private double posRight = 0;
 
 
     @Override
     public void runOpMode() {
-
 
 
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -42,10 +42,13 @@ public class DriveSystem extends LinearOpMode {
         leftClaw = hardwareMap.get(Servo.class, "leftClaw");
         rightClaw = hardwareMap.get(Servo.class, "rightClaw");
 
-        rightClaw.setPosition(0);
-        leftClaw.setPosition(0);
+        rightClaw.setPosition(posLeft);
+        leftClaw.setPosition(posRight);
 
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Status", status);
+        telemetry.addData("Speed", speed);
+        telemetry.addData("Left servo pos", posLeft);
+        telemetry.addData("Right servo pos", posRight);
         telemetry.update();
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -53,6 +56,7 @@ public class DriveSystem extends LinearOpMode {
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         spinner.setDirection(DcMotor.Direction.FORWARD);
+        arm.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -69,15 +73,19 @@ public class DriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
             double spinnerSpeed = 0;
+            double armSpeed = 0;
+            // Sets the string values for telemetry
+            status = "On";
+            speed = "Fast";
+
             //variable for claw position
             double lcPos = leftClaw.getPosition(); //Setting left Claw position
             double rcPos = rightClaw.getPosition(); //Setting Right Claw position
 
 
-
             //space where slowing code will go
-            if(gamepad1.y){
-                if(slow == false){
+            if (gamepad1.y) {
+                if (slow == false) {
                     slow = true;
                 } else {
                     slow = false;
@@ -92,7 +100,8 @@ public class DriveSystem extends LinearOpMode {
                 speed = "Slow";
 //                telemetry.addData("Spinner", "On and Front Spinning");
 //                telemetry.addData("Speed", "Slow");
-            } if (slow && gamepad1.b) {
+            }
+            if (slow && gamepad1.b) {
                 spinner.setDirection(DcMotor.Direction.REVERSE);
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
@@ -127,51 +136,49 @@ public class DriveSystem extends LinearOpMode {
                 speed = "Fast";
 //                telemetry.addData("Speed", "Fast");
             }
-
-            //arm work -- might change in the future
-            if(gamepad1.dpad_up){
+//                This controls the arm lol
+            if (gamepad1.dpad_up) {
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
-                arm.setPower(1);
+                arm.setPower(0.75);
                 status = "arm up";
-//                telemetry.addData("status","arm up");
-            }else if(gamepad1.dpad_down){
+            } else if (gamepad1.dpad_down) {
                 //move claw down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
-                arm.setPower(1);
+                arm.setPower(0.75);
                 status = "arm down";
             } else {
                 arm.setPower(0);
                 status = null;
             }
 
-            if(gamepad1.dpad_right){
+            //These control the servos
+            if (gamepad1.dpad_right) {
                 leftClaw.setPosition(lcPos += 0.1);
-            }else if(gamepad1.dpad_left){
-                //close claw
-            } else{
-                arm.setPower(0);
+                rightClaw.setPosition(rcPos -= 0.1);
+            } else if (gamepad1.dpad_left) {
+                leftClaw.setPosition(lcPos -= 0.1);
+                rightClaw.setPosition(rcPos += 0.1);
             }
-//            telemetry.update();
 
-
-            // POV Mode uses left stick to go forward, and right stick to turn.
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
-            rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
+            rightPower = Range.clip(drive - turn, -rightSpeed, rightSpeed);
 
 
             // Send calculated power to wheels
             leftDrive.setPower(-leftPower);
             rightDrive.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
+            arm.setPower(armSpeed);
 
 
             // Show the elapsed game time and wheel power.
+            speed = "Fast";
             telemetry.addData("Run time", runtime.toString());
-            telemetry.addData("Status",status);
-            telemetry.addData("speed",speed);
+            telemetry.addData("Status", status);
+            telemetry.addData("speed", speed);
             telemetry.update();
         }
     }

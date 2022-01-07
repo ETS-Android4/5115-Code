@@ -76,7 +76,7 @@ import java.util.List;
  */
 
 @TeleOp(name="Vuforia Field Nav Webcam", group ="Concept")
-//@Disabled
+@Disabled
 public class VuPosTest extends LinearOpMode {
 
     /*
