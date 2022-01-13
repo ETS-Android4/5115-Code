@@ -20,7 +20,7 @@ public class BlueAuto extends LinearOpMode {
         right = hardwareMap.dcMotor.get("right");
         spinner = hardwareMap.dcMotor.get("spinner");
         left.setDirection(DcMotor.Direction.REVERSE);
-        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
+        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
 
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

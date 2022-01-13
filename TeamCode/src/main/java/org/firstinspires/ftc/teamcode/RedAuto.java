@@ -24,7 +24,7 @@ public class RedAuto extends LinearOpMode{
         right = hardwareMap.dcMotor.get("right");
         spinner = hardwareMap.dcMotor.get("spinner");
         left.setDirection(DcMotor.Direction.REVERSE);
-        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
+        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
 
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -89,12 +89,13 @@ public class RedAuto extends LinearOpMode{
             left.setPower(speed);
             right.setPower(speed);
 
-            while (opModeIsActive() && left.isBusy() && right.isBusy()){
-                telemetry.addData("Status", status);
-                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"Right: "+right.getCurrentPosition());
-                telemetry.update();
-                idle();
-            }
+//            while (opModeIsActive() && left.isBusy() && right.isBusy()){
+//                telemetry.addData("Status", status);
+//                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"Right: "+right.getCurrentPosition());
+//                telemetry.update();
+//                idle();
+//            }
+            
 
             left.setPower(0);
             right.setPower(0);
