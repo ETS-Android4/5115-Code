@@ -135,7 +135,7 @@ DriveSystem extends LinearOpMode {
 //                telemetry.addData("Speed", "Fast");
             }
 
-            //arm work -- might change in the future
+            //Moving the arm
             if(gamepad1.dpad_up){
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -143,7 +143,7 @@ DriveSystem extends LinearOpMode {
                 status = "arm up";
 //                telemetry.addData("status","arm up");
             }else if(gamepad1.dpad_down){
-                //move claw down
+                //move arm down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
                 arm.setPower(1);
                 status = "arm down";
@@ -154,9 +154,11 @@ DriveSystem extends LinearOpMode {
 
             //These control the servos
             if (gamepad1.dpad_right) {
+                //open claw
                 leftClaw.setPosition(lcPos += 0.1);
                 rightClaw.setPosition(rcPos -= 0.1);
             } else if (gamepad1.dpad_left) {
+                //close claw
                 leftClaw.setPosition(lcPos -= 0.1);
                 rightClaw.setPosition(rcPos += 0.1);
             }
