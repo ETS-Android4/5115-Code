@@ -136,16 +136,43 @@ DriveSystem extends LinearOpMode {
             }
 
             //Moving the arm
-            if(gamepad1.dpad_up){
+//            if(gamepad1.dpad_up){
+//                //move arm up
+//                arm.setDirection(DcMotorSimple.Direction.REVERSE);
+//                arm.setPower(1);
+//                status = "arm up";
+////                telemetry.addData("status","arm up");
+//            }else if(gamepad1.dpad_down){
+//                //move arm down
+//                arm.setDirection(DcMotorSimple.Direction.FORWARD);
+//                arm.setPower(1);
+//                status = "arm down";
+//            } else {
+//                arm.setPower(0);
+//                status = null;
+//            }
+//
+//            //These control the servos
+//            if (gamepad1.dpad_right) {
+//                //open claw
+//                leftClaw.setPosition(lcPos += 0.1);
+//                rightClaw.setPosition(rcPos -= 0.1);
+//            } else if (gamepad1.dpad_left) {
+//                //close claw
+//                leftClaw.setPosition(lcPos -= 0.1);
+//                rightClaw.setPosition(rcPos += 0.1);
+//            }
+
+            if(gamepad1.right_trigger > 0){
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
-                arm.setPower(1);
+                arm.setPower(gamepad1.right_trigger);
                 status = "arm up";
 //                telemetry.addData("status","arm up");
-            }else if(gamepad1.dpad_down){
+            }else if(gamepad1.left_trigger > 0){
                 //move arm down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
-                arm.setPower(1);
+                arm.setPower(gamepad1.left_trigger);
                 status = "arm down";
             } else {
                 arm.setPower(0);
@@ -153,11 +180,11 @@ DriveSystem extends LinearOpMode {
             }
 
             //These control the servos
-            if (gamepad1.dpad_right) {
+            if (gamepad1.right_bumper) {
                 //open claw
                 leftClaw.setPosition(lcPos += 0.1);
                 rightClaw.setPosition(rcPos -= 0.1);
-            } else if (gamepad1.dpad_left) {
+            } else if (gamepad1.left_bumper) {
                 //close claw
                 leftClaw.setPosition(lcPos -= 0.1);
                 rightClaw.setPosition(rcPos += 0.1);
