@@ -78,6 +78,7 @@ public class RedAuto extends LinearOpMode{
         telemetry.addData("Status","finished");
         telemetry.update();
         sleep(5000);
+        //
 
 
 
