@@ -75,6 +75,7 @@ DriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
             double spinnerSpeed = 0;
+            double armSpeed = 1;
             //variable for claw position
             double lcPos = leftClaw.getPosition(); //Setting left Claw position
             double rcPos = rightClaw.getPosition(); //Setting Right Claw position
@@ -151,27 +152,26 @@ DriveSystem extends LinearOpMode {
                 status = null;
             }
 
-            if(gamepad1.dpad_right){
+            //These control the servos
+            if (gamepad1.dpad_right) {
                 leftClaw.setPosition(lcPos += 0.1);
-            }else if(gamepad1.dpad_left){
-                //close claw
-            } else{
-                arm.setPower(0);
+                rightClaw.setPosition(rcPos -= 0.1);
+            } else if (gamepad1.dpad_left) {
+                leftClaw.setPosition(lcPos -= 0.1);
+                rightClaw.setPosition(rcPos += 0.1);
             }
-//            telemetry.update();
 
-
-            // POV Mode uses left stick to go forward, and right stick to turn.
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
-            rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
+            rightPower = Range.clip(drive - turn, -rightSpeed, rightSpeed);
 
 
             // Send calculated power to wheels
             leftDrive.setPower(-leftPower);
             rightDrive.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
+            arm.setPower(armSpeed);
 
 
             // Show the elapsed game time and wheel power.
