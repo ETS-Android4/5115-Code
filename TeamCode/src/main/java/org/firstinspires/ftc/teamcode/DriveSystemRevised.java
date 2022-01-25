@@ -24,8 +24,8 @@ public class DriveSystemRevised extends LinearOpMode {
     private Servo rightClaw = null;
     private String status = "Off";
     private String speed = "No value";
-    private double posLeft = 1;
-    private double posRight = 0;
+    private double posLeft = 0;
+    private double posRight = 1;
 
 
     @Override
@@ -137,12 +137,12 @@ public class DriveSystemRevised extends LinearOpMode {
 //                telemetry.addData("Speed", "Fast");
             }
 //                This controls the arm lol
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_up || gamepad1.left_trigger > 0) {
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
                 arm.setPower(1);
                 status = "arm up";
-            } else if (gamepad1.dpad_down) {
+            } else if (gamepad1.dpad_down || gamepad1.right_trigger > 0) {
                 //move claw down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
                 arm.setPower(1);
@@ -153,12 +153,12 @@ public class DriveSystemRevised extends LinearOpMode {
             }
 
             //These control the servos
-            if (gamepad1.dpad_right) {
-                leftClaw.setPosition(lcPos += 0.1);
-                rightClaw.setPosition(rcPos -= 0.1);
-            } else if (gamepad1.dpad_left) {
+            if (gamepad1.dpad_right || gamepad1.right_bumper) {
                 leftClaw.setPosition(lcPos -= 0.1);
                 rightClaw.setPosition(rcPos += 0.1);
+            } else if (gamepad1.dpad_left || gamepad1.left_bumper) {
+                leftClaw.setPosition(lcPos += 0.1);
+                rightClaw.setPosition(rcPos -= 0.1);
             }
 
             double drive = -gamepad1.left_stick_y;

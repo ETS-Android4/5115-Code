@@ -12,7 +12,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "Drive System", group = "Linear Opmode")
 //@Disabled
-public class DriveSystem extends LinearOpMode {
+public class
+
+
+
+
+
+DriveSystem extends LinearOpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
@@ -69,6 +75,7 @@ public class DriveSystem extends LinearOpMode {
             double leftSpeed = 1;
             double rightSpeed = 1;
             double spinnerSpeed = 0;
+            double armSpeed = 1;
             //variable for claw position
             double lcPos = leftClaw.getPosition(); //Setting left Claw position
             double rcPos = rightClaw.getPosition(); //Setting Right Claw position
@@ -128,44 +135,72 @@ public class DriveSystem extends LinearOpMode {
 //                telemetry.addData("Speed", "Fast");
             }
 
-            //arm work -- might change in the future
-            if(gamepad1.dpad_up){
+            //Moving the arm
+//            if(gamepad1.dpad_up){
+//                //move arm up
+//                arm.setDirection(DcMotorSimple.Direction.REVERSE);
+//                arm.setPower(1);
+//                status = "arm up";
+////                telemetry.addData("status","arm up");
+//            }else if(gamepad1.dpad_down){
+//                //move arm down
+//                arm.setDirection(DcMotorSimple.Direction.FORWARD);
+//                arm.setPower(1);
+//                status = "arm down";
+//            } else {
+//                arm.setPower(0);
+//                status = null;
+//            }
+//
+//            //These control the servos
+//            if (gamepad1.dpad_right) {
+//                //open claw
+//                leftClaw.setPosition(lcPos += 0.1);
+//                rightClaw.setPosition(rcPos -= 0.1);
+//            } else if (gamepad1.dpad_left) {
+//                //close claw
+//                leftClaw.setPosition(lcPos -= 0.1);
+//                rightClaw.setPosition(rcPos += 0.1);
+//            }
+
+            if(gamepad1.right_trigger > 0){
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
-                arm.setPower(1);
+                arm.setPower(gamepad1.right_trigger);
                 status = "arm up";
 //                telemetry.addData("status","arm up");
-            }else if(gamepad1.dpad_down){
-                //move claw down
+            }else if(gamepad1.left_trigger > 0){
+                //move arm down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
-                arm.setPower(1);
+                arm.setPower(gamepad1.left_trigger);
                 status = "arm down";
             } else {
                 arm.setPower(0);
                 status = null;
             }
 
-            if(gamepad1.dpad_right){
+            //These control the servos
+            if (gamepad1.right_bumper) {
+                //open claw
                 leftClaw.setPosition(lcPos += 0.1);
-            }else if(gamepad1.dpad_left){
+                rightClaw.setPosition(rcPos -= 0.1);
+            } else if (gamepad1.left_bumper) {
                 //close claw
-            } else{
-                arm.setPower(0);
+                leftClaw.setPosition(lcPos -= 0.1);
+                rightClaw.setPosition(rcPos += 0.1);
             }
-//            telemetry.update();
 
-
-            // POV Mode uses left stick to go forward, and right stick to turn.
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
             leftPower = Range.clip(drive + turn, -leftSpeed, leftSpeed);
-            rightPower = Range.clip(drive - turn, -rightSpeed  , rightSpeed);
+            rightPower = Range.clip(drive - turn, -rightSpeed, rightSpeed);
 
 
             // Send calculated power to wheels
             leftDrive.setPower(-leftPower);
             rightDrive.setPower(-rightPower);
             spinner.setPower(spinnerSpeed);
+            arm.setPower(armSpeed);
 
 
             // Show the elapsed game time and wheel power.

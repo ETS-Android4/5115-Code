@@ -24,7 +24,9 @@ public class RedAuto extends LinearOpMode{
         right = hardwareMap.dcMotor.get("right");
         spinner = hardwareMap.dcMotor.get("spinner");
         left.setDirection(DcMotor.Direction.REVERSE);
-        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
+        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
+        left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -34,9 +36,26 @@ public class RedAuto extends LinearOpMode{
 
 
         waitForStart();
+// THE FOLLOWING WAS FOR TESTING PURPOSES
+//        left.setTargetPosition(250);
+//        right.setTargetPosition(250);
+//        left.setPower(speed);
+//        right.setPower(speed);
+//        left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        while(left.isBusy() && right.isBusy()){
+//            telemetry.addData("Status", "testing");
+//            telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"  Right: "+right.getCurrentPosition());
+//            telemetry.update();
+//            idle();
+//        }
+//        left.setPower(0);
+//        right.setPower(0);
 
-        encoders(250,250,"Forward 1");
-        encoders(-700,700,"left turn");
+        //REAL CODE NOW
+        encoders(200,200,"Forward 1");
+        encoders(-750,750,"left turn");
         encoders(1800,1800,"forward 2");
         encoders(-100,-100,"fixing");
         spinner.setPower(0.4);
@@ -50,15 +69,16 @@ public class RedAuto extends LinearOpMode{
         right.setPower(0);
 
         encoders(-500,-500, "reverse1");
-        encoders(-500,500,"turn");
-        encoders(-1000,-1000,"reverse");
-        encoders(500,-500,"turn");
+        encoders(-300,300,"turn");
+        encoders(-400,-400,"reverse");
+        encoders(300,-300,"turn");
         encoders(-4000,-4000,"reverse to warehouse");
 
 
         telemetry.addData("Status","finished");
         telemetry.update();
         sleep(5000);
+        //
 
 
 
@@ -83,24 +103,43 @@ public class RedAuto extends LinearOpMode{
             right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             left.setTargetPosition(targetLeft);
             right.setTargetPosition(targetRight);
+            left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            telemetry.addData("Status", status);
+            telemetry.update();
 
             left.setPower(speed);
             right.setPower(speed);
 
             while (opModeIsActive() && left.isBusy() && right.isBusy()){
                 telemetry.addData("Status", status);
-                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"Right: "+right.getCurrentPosition());
+                telemetry.addData("Encoder Position", "Left: "+left.getCurrentPosition()+"  Right: "+right.getCurrentPosition());
                 telemetry.update();
+//                if(left.getCurrentPosition() >= left.getTargetPosition()){
+//                    break;
+//                } else {
+//                    idle();
+//                }
                 idle();
             }
+//            while(opModeIsActive() && left.isBusy()){
+//
+//                if(left.getCurrentPosition() >= left.getTargetPosition()){
+//                    break;
+//                } else {
+//                    idle();
+//                }
+//            }
+            
 
             left.setPower(0);
             right.setPower(0);
 
-            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             sleep(1000);
         }
