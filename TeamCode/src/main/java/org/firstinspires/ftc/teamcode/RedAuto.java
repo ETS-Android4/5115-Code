@@ -54,8 +54,8 @@ public class RedAuto extends LinearOpMode{
 //        right.setPower(0);
 
         //REAL CODE NOW
-        encoders(250,250,"Forward 1");
-        encoders(-650,650,"left turn");
+        encoders(200,200,"Forward 1");
+        encoders(-750,750,"left turn");
         encoders(1800,1800,"forward 2");
         encoders(-100,-100,"fixing");
         spinner.setPower(0.4);
@@ -138,8 +138,8 @@ public class RedAuto extends LinearOpMode{
             left.setPower(0);
             right.setPower(0);
 
-            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             sleep(1000);
         }
