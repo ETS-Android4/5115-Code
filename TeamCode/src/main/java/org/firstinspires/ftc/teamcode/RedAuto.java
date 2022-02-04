@@ -1,7 +1,7 @@
 /*
-* Place Robot on 3rd tile from the carousel,
-*  with the left side lined up on the left edge of the tile
-* */
+ * Place Robot on 3rd tile from the carousel,
+ *  with the left side lined up on the left edge of the tile
+ * */
 
 package org.firstinspires.ftc.teamcode;
 
@@ -17,14 +17,15 @@ public class RedAuto extends LinearOpMode{
     DcMotor spinner;
     boolean ran = false;
 
-    double speed = 0.6;
+    double leftspeed = 0.6;
+    double rightspeed = 0.6;
 
     public void runOpMode(){
         left = hardwareMap.dcMotor.get("left");
         right = hardwareMap.dcMotor.get("right");
         spinner = hardwareMap.dcMotor.get("spinner");
         left.setDirection(DcMotor.Direction.REVERSE);
-        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
+        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -55,7 +56,7 @@ public class RedAuto extends LinearOpMode{
 
         //REAL CODE NOW
         encoders(200,200,"Forward 1");
-        encoders(-750,750,"left turn");
+        encoders(-600,600,"left turn");
         encoders(1800,1800,"forward 2");
         encoders(-100,-100,"fixing");
         spinner.setPower(0.4);
@@ -71,7 +72,7 @@ public class RedAuto extends LinearOpMode{
         encoders(-500,-500, "reverse1");
         encoders(-300,300,"turn");
         encoders(-400,-400,"reverse");
-        encoders(300,-300,"turn");
+//        encoders(300,-300,"turn");
         encoders(-4000,-4000,"reverse to warehouse");
 
 
@@ -111,8 +112,8 @@ public class RedAuto extends LinearOpMode{
             telemetry.addData("Status", status);
             telemetry.update();
 
-            left.setPower(speed);
-            right.setPower(speed);
+            left.setPower(leftspeed);
+            right.setPower(rightspeed);
 
             while (opModeIsActive() && left.isBusy() && right.isBusy()){
                 telemetry.addData("Status", status);
@@ -133,7 +134,7 @@ public class RedAuto extends LinearOpMode{
 //                    idle();
 //                }
 //            }
-            
+
 
             left.setPower(0);
             right.setPower(0);
