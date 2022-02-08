@@ -17,7 +17,10 @@ public class BlueAuto extends LinearOpMode{
     DcMotor spinner;
     boolean ran = false;
 
-    double speed = 0.6;
+    //changed for 40:1 during competition crisis, was 0.6
+    double leftspeed = 1;
+    double rightspeed = 0.5;
+
 
     public void runOpMode(){
         left = hardwareMap.dcMotor.get("left");
@@ -70,11 +73,11 @@ public class BlueAuto extends LinearOpMode{
         left.setPower(0);
         right.setPower(0);
 
-        encoders(-500,-500, "reverse1");
-        encoders(-800,800,"turn");
-//        encoders(-400,-400,"reverse");
-//        encoders(-300,300,"turn");
-        encoders(-4000,-4000,"reverse to warehouse");
+//        encoders(-500,-500, "reverse1");
+//        encoders(-800,800,"turn");
+////        encoders(-400,-400,"reverse");
+////        encoders(-300,300,"turn");
+//        encoders(-4000,-4000,"reverse to warehouse");
 
 
         telemetry.addData("Status","finished");
@@ -113,8 +116,8 @@ public class BlueAuto extends LinearOpMode{
             telemetry.addData("Status", status);
             telemetry.update();
 
-            left.setPower(speed);
-            right.setPower(speed);
+            left.setPower(leftspeed);
+            right.setPower(rightspeed);
 
             while (opModeIsActive() && left.isBusy() && right.isBusy()){
                 telemetry.addData("Status", status);

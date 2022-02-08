@@ -71,7 +71,7 @@ public class DriveSystemRevised extends LinearOpMode {
             double rightPower;
             // Set the speed as a variable to reduce space usage
             double leftSpeed = 1;
-            double rightSpeed = 1;
+            double rightSpeed = 0.5;
             double spinnerSpeed = 0;
             double armSpeed = 0;
             // Sets the string values for telemetry

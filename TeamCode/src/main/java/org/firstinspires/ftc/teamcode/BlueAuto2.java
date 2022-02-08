@@ -1,7 +1,7 @@
 /*
-* Place Robot on 3rd tile from the carousel,
-*  with the left side lined up on the left edge of the tile
-* */
+ * Place Robot on 3rd tile from the carousel,
+ *  with the left side lined up on the left edge of the tile
+ * */
 
 package org.firstinspires.ftc.teamcode;
 
@@ -10,22 +10,23 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "Red Auto 1", group = "Linear Opmode")
-public class RedAuto extends LinearOpMode{
+@Autonomous(name = "Blue Auto 2", group = "Linear Opmode")
+public class BlueAuto2 extends LinearOpMode{
     DcMotor left;
     DcMotor right;
     DcMotor spinner;
     boolean ran = false;
 
-    double leftspeed = 0.6;
-    double rightspeed = 0.6;
+    //changed for 40:1 during competition crisis, was 0.6
+    double leftspeed = 1;
+    double rightspeed = 0.5;
 
     public void runOpMode(){
         left = hardwareMap.dcMotor.get("left");
         right = hardwareMap.dcMotor.get("right");
         spinner = hardwareMap.dcMotor.get("spinner");
         left.setDirection(DcMotor.Direction.REVERSE);
-        spinner.setDirection(DcMotorSimple.Direction.REVERSE);
+        spinner.setDirection(DcMotorSimple.Direction.FORWARD);
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -55,22 +56,15 @@ public class RedAuto extends LinearOpMode{
 //        right.setPower(0);
 
         //REAL CODE NOW
-        encoders(200,200,"Forward 1");
-        encoders(-600,600,"left turn");
-        encoders(1600,1600,"forward 2");
-//        encoders(-100,-100,"fixing");
-
+        encoders(400,400,"Forward 1");
+        encoders(725,-725,"left turn");
+        encoders(1800,1800,"forward 2");
+//        encoders(800,-800,"right 90");
+//        encoders(300,300,"approaching carousel");
+        encoders(-100,-100,"fixing");
+        spinner.setPower(0.4);
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        //approach carousel slowly
-        left.setPower(0.3);
-        right.setPower(0.4);
-        sleep(2000);
-
-
-        spinner.setPower(0.4);
-
         left.setPower(0.2); //keep pressure to the carousel
         right.setPower(0.3);
         sleep(5000);
@@ -79,9 +73,9 @@ public class RedAuto extends LinearOpMode{
         right.setPower(0);
 
 //        encoders(-500,-500, "reverse1");
-//        encoders(-300,300,"turn");
-//        encoders(-400,-400,"reverse");
-////        encoders(300,-300,"turn");
+//        encoders(-800,800,"turn");
+////        encoders(-400,-400,"reverse");
+////        encoders(-300,300,"turn");
 //        encoders(-4000,-4000,"reverse to warehouse");
 
 
@@ -143,13 +137,13 @@ public class RedAuto extends LinearOpMode{
 //                    idle();
 //                }
 //            }
-            
+
 
             left.setPower(0);
             right.setPower(0);
 
-//            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             sleep(1000);
         }

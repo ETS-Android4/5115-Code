@@ -1,7 +1,7 @@
 /*
-* Place Robot on 3rd tile from the carousel,
-*  with the left side lined up on the left edge of the tile
-* */
+ * Place Robot on 3rd tile from the carousel,
+ *  with the left side lined up on the left edge of the tile
+ * */
 
 package org.firstinspires.ftc.teamcode;
 
@@ -10,15 +10,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "Red Auto 1", group = "Linear Opmode")
-public class RedAuto extends LinearOpMode{
+@Autonomous(name = "Red Auto 2", group = "Linear Opmode")
+public class RedAuto2 extends LinearOpMode{
     DcMotor left;
     DcMotor right;
     DcMotor spinner;
     boolean ran = false;
 
-    double leftspeed = 0.6;
-    double rightspeed = 0.6;
+    double leftspeed = 0.5;
+    double rightspeed = 0.5;
 
     public void runOpMode(){
         left = hardwareMap.dcMotor.get("left");
@@ -57,16 +57,20 @@ public class RedAuto extends LinearOpMode{
         //REAL CODE NOW
         encoders(200,200,"Forward 1");
         encoders(-600,600,"left turn");
-        encoders(1600,1600,"forward 2");
+        encoders(500,500,"forward 2");
+
 //        encoders(-100,-100,"fixing");
 
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //approach carousel slowly
-        left.setPower(0.3);
-        right.setPower(0.4);
-        sleep(2000);
+//        encoders(-100,100);
+        left.setPower(-0.4);
+        right.setPower(0.5);
+        sleep(1000);
+        left.setPower(0);
+        right.setPower(0);
 
 
         spinner.setPower(0.4);
@@ -143,7 +147,7 @@ public class RedAuto extends LinearOpMode{
 //                    idle();
 //                }
 //            }
-            
+
 
             left.setPower(0);
             right.setPower(0);
