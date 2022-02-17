@@ -53,10 +53,10 @@ public class DriveSystemRevised extends LinearOpMode {
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         spinner.setDirection(DcMotor.Direction.FORWARD);
-        arm.setDirection(DcMotor.Direction.FORWARD);
+//        arm.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -71,7 +71,7 @@ public class DriveSystemRevised extends LinearOpMode {
             double rightPower;
             // Set the speed as a variable to reduce space usage
             double leftSpeed = 1;
-            double rightSpeed = 0.5;
+            double rightSpeed = 1;
             double spinnerSpeed = 0;
             double armSpeed = 0;
             // Sets the string values for telemetry
@@ -98,8 +98,6 @@ public class DriveSystemRevised extends LinearOpMode {
                 spinnerSpeed = 0.5;
                 status = "Spinner forward";
                 speed = "Slow";
-//                telemetry.addData("Spinner", "On and Front Spinning");
-//                telemetry.addData("Speed", "Slow");
             }
             if (slow && gamepad1.b) {
                 spinner.setDirection(DcMotor.Direction.REVERSE);
@@ -108,8 +106,6 @@ public class DriveSystemRevised extends LinearOpMode {
                 spinnerSpeed = 0.5;
                 status = "Spinner Backwards";
                 speed = "Slow";
-//                telemetry.addData("Spinner", "On and Front Spinning");
-//                telemetry.addData("Speed", "Slow");
             } else if (slow) {
                 leftSpeed = 0.5;
                 rightSpeed = 0.5;
@@ -137,15 +133,31 @@ public class DriveSystemRevised extends LinearOpMode {
 //                telemetry.addData("Speed", "Fast");
             }
 //                This controls the arm lol
-            if (gamepad1.dpad_up || gamepad1.left_trigger > 0) {
+            if (gamepad1.dpad_up) {
                 //move arm up
                 arm.setDirection(DcMotorSimple.Direction.REVERSE);
                 arm.setPower(1);
                 status = "arm up";
-            } else if (gamepad1.dpad_down || gamepad1.right_trigger > 0) {
+            } else if (gamepad1.dpad_down) {
                 //move claw down
                 arm.setDirection(DcMotorSimple.Direction.FORWARD);
                 arm.setPower(1);
+                status = "arm down";
+            } else {
+                arm.setPower(0);
+                status = null;
+            }
+
+            //for triggers; gives more control
+
+
+            if(gamepad1.left_trigger > 0){
+                arm.setDirection(DcMotorSimple.Direction.REVERSE);
+                arm.setPower(gamepad1.left_trigger);
+                status = "arm up";
+            } else if(gamepad1.right_trigger > 0){
+                arm.setDirection(DcMotorSimple.Direction.FORWARD);
+                arm.setPower(gamepad1.right_trigger);
                 status = "arm down";
             } else {
                 arm.setPower(0);

@@ -9,7 +9,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
+//DO NOT USE THIS OP MODE. IT BROKE THE ARM. DO NOT ENABLE THIS
+//@Disabled
 @TeleOp(name = "Drive System", group = "Linear Opmode")
 //@Disabled
 public class
