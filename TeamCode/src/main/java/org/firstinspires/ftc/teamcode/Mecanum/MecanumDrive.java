@@ -134,14 +134,7 @@ public class MecanumDrive extends OpMode
                 speed = "fast";
             }
 */
-        if(gamepad1.left_trigger > 0.9 && gamepad1.right_trigger >0.9) {
-            slow = true;
-            speed = "slow";
-            power = 0.5;
-        } else {
-            slow = false;
-            speed = "fast";
-        }
+
 //        if(!gamepad1.y) {
 //
 //        }
@@ -150,12 +143,12 @@ public class MecanumDrive extends OpMode
 
 
         //                This controls the arm lol
-        if (gamepad1.dpad_up || gamepad1.left_trigger > 0) {
+        if (gamepad1.dpad_up) {
             //move arm up
             arm.setDirection(DcMotorSimple.Direction.REVERSE);
             arm.setPower(0.8);
             status = "arm up";
-        } else if (gamepad1.dpad_down || gamepad1.right_trigger > 0) {
+        } else if (gamepad1.dpad_down) {
             //move claw down
             arm.setDirection(DcMotorSimple.Direction.FORWARD);
             arm.setPower(0.8);
@@ -164,6 +157,32 @@ public class MecanumDrive extends OpMode
             arm.setPower(0);
             status = null;
         }
+
+        if(gamepad1.left_trigger > 0.9 && gamepad1.right_trigger >0.9) {
+            slow = true;
+            speed = "slow";
+            power = 0.5;
+        } else if(gamepad1.left_trigger > 0){
+            arm.setDirection(DcMotorSimple.Direction.REVERSE);
+            arm.setPower(gamepad1.left_trigger);
+            status = "arm up";
+
+            //turning off slow mode
+            slow = false;
+            speed = "fast";
+        } else if(gamepad1.right_trigger > 0){
+            arm.setDirection(DcMotorSimple.Direction.FORWARD);
+            arm.setPower(gamepad1.right_trigger);
+            //turning off slow mode
+            slow = false;
+            speed = "fast";
+        } else{
+            //turning off slow mode
+            slow = false;
+            speed = "fast";
+        }
+
+
 
         //These control the servos
         if (gamepad1.dpad_right || gamepad1.right_bumper) {
@@ -201,10 +220,10 @@ public class MecanumDrive extends OpMode
 
 
 
-        powerF1 = Range.clip(powerF1,-1.0, 1.0);//clips values to avoid program errors
-        powerF2 = Range.clip(powerF2,-1.0, 1.0);
+        powerF1 = Range.clip(powerF1,-1, 1);//clips values to avoid program errors
+        powerF2 = Range.clip(powerF2,-1, 1);
         powerR1 = Range.clip(powerR1,-1.0, 1.0);
-        powerR2 = Range.clip(powerR2,-1.0, 1.0);
+        powerR2 = Range.clip(powerR2,-1, 1);
 
         telemetry.addData("right stick x: ", gamepad1.right_stick_x);
         telemetry.addData("Status",status);

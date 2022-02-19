@@ -6,10 +6,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+@Disabled
 @Autonomous(name = "Blue Auto 2", group = "Linear Opmode")
 public class BlueAuto2 extends LinearOpMode{
     DcMotor left;

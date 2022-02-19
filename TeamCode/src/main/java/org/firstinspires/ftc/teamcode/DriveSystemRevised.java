@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name = "Better Drive System", group = "Linear Opmode")
-//@Disabled
+@Disabled
 public class DriveSystemRevised extends LinearOpMode {
 
     // Declare OpMode members.
