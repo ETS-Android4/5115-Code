@@ -28,10 +28,10 @@ public class mRed1 extends LinearOpMode {
     private DcMotor R2 = null;
     private DcMotor arm = null;
     private DcMotor spinner = null;
-    private double F1speed = 0.6;
-    private double F2speed = 0.6;
-    private double R1speed = 0.2;
-    private double R2speed = 0.6;
+    private double F1speed = 0.4;
+    private double F2speed = 0.4;
+    private double R1speed = 0.4;
+    private double R2speed = 0.4;
 
     @Override
     public void runOpMode() {
@@ -60,18 +60,18 @@ public class mRed1 extends LinearOpMode {
         waitForStart();
 
         xDrive(315); //forward
-        turn(1200); //right turn 90 degrees
+        turn(600); //right turn 90 degrees
         xDrive(-1000); //reverse to carousel
 
         //apply pressure to carousel
-        F1.setPower(-0.3);
-        F2.setPower(-0.3);
-        R1.setPower(-0.3);
-        R2.setPower(-0.3);
+        F1.setPower(-0.1);
+        F2.setPower(-0.1);
+        R1.setPower(-0.1);
+        R2.setPower(-0.1);
 
         spinner.setPower(0.5);
 
-        sleep(1000);
+        sleep(3000);
 
         spinner.setPower(0);
 

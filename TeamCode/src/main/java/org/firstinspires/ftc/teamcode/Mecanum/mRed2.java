@@ -60,7 +60,7 @@ public class mRed2 extends LinearOpMode {
         waitForStart();
 
         xDrive(315); //forward
-        turn(1000); //right turn 90 degrees
+        turn(600); //right turn 90 degrees
         xDrive(-2000); //reverse to carousel
 
         //apply pressure to carousel
