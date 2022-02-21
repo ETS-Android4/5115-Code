@@ -28,10 +28,10 @@ public class mBlue2 extends LinearOpMode {
     private DcMotor R2 = null;
     private DcMotor arm = null;
     private DcMotor spinner = null;
-    private double F1speed = 0.6;
-    private double F2speed = 0.6;
+    private double F1speed = 1;
+    private double F2speed = 0.2;
     private double R1speed = 0.2;
-    private double R2speed = 0.6;
+    private double R2speed = 1;
 
     @Override
     public void runOpMode() {
@@ -60,6 +60,7 @@ public class mBlue2 extends LinearOpMode {
         waitForStart();
 
         xDrive(315); //forward
+
         yDrive(2000);
 
         //apply pressure to carousel

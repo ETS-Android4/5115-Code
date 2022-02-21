@@ -19,8 +19,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name="Pogbot Red1", group="Mecanum")
-public class mRed1 extends LinearOpMode {
+@Autonomous(name="Pogbot WareHouse", group="Mecanum")
+public class mWarehouse extends LinearOpMode {
 
     private DcMotor F1 = null;
     private DcMotor F2 = null;
@@ -29,8 +29,8 @@ public class mRed1 extends LinearOpMode {
     private DcMotor arm = null;
     private DcMotor spinner = null;
     private double F1speed = 1;
-    private double F2speed = 0.2;
-    private double R1speed = 0.2;
+    private double F2speed = 1;
+    private double R1speed = 1;
     private double R2speed = 1;
 
     @Override
@@ -39,15 +39,10 @@ public class mRed1 extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
 
         //GoBuilda 5202 motors go 12.3 inches in 537.6 encoder ticks
-//        F1 = hardwareMap.get(DcMotor.class, "F1");
-//        F2 = hardwareMap.get(DcMotor.class, "F2");
-//        R1 = hardwareMap.get(DcMotor.class, "R1");
-//        R2 = hardwareMap.get(DcMotor.class, "R2");
-
-        F1 = hardwareMap.dcMotor.get("F1");
-        F2 = hardwareMap.dcMotor.get("F2");
-        R1 = hardwareMap.dcMotor.get("R1");
-        R2 = hardwareMap.dcMotor.get("R2");
+        F1 = hardwareMap.get(DcMotor.class, "F1");
+        F2 = hardwareMap.get(DcMotor.class, "F2");
+        R1 = hardwareMap.get(DcMotor.class, "R1");
+        R2 = hardwareMap.get(DcMotor.class, "R2");
         spinner = hardwareMap.get(DcMotor.class, "spinner");
 
         F1.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -64,71 +59,12 @@ public class mRed1 extends LinearOpMode {
 
         waitForStart();
 
-        xDrive(315 ); //forward
-        turn(1400); //right turn 90 degrees
-        xDrive(-1000); //reverse to carousel
-//
-//        //apply pressure to carousel
-//        F1.setPower(-0.1);
-//        F2.setPower(-0.1);
-//        R1.setPower(-0.1);
-//        R2.setPower(-0.1);
-//
-//        spinner.setPower(0.5);
-//
-//        sleep(3000);
-//
-//        spinner.setPower(0);
-
-        F1.setPower(0);
-        F2.setPower(0);
-        R1.setPower(0);
-        R2.setPower(0);
 
 
-//        F1.setTargetPosition(1000);
-//        F2.setTargetPosition(-1000);    //right side motor
-//        R1.setTargetPosition(1000);
-//        R2.setTargetPosition(-1000); //right side motor
-//
-//        F1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        F2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        R1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        R2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//        F1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        F2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        R1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        R2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//
-//        F1.setPower(1);
-//        F2.setPower(1);
-//        R1.setPower(0.4);
-//        R2.setPower(1);
-//
-//        while (opModeIsActive() && F1.isBusy()){
-//            telemetry.addData("Status", "encoder test");
-//            telemetry.addData("Encoder Position", "F1: "+F1.getCurrentPosition()+"  F2: "+F2.getCurrentPosition());
-//            telemetry.addData("Encoder Position", "R1: "+R1.getCurrentPosition()+"  R2: "+R2.getCurrentPosition());
-//            telemetry.update();
-////                if(left.getCurrentPosition() >= left.getTargetPosition()){
-////                    break;
-////                } else {
-////                    idle();
-////                }
-//            idle();
-//        }
-//
-//
-//
-//        F1.setPower(0);
-//        F2.setPower(0);
-//        R1.setPower(0);
-//        R2.setPower(0);
-//
-        sleep(5000);
 
+
+
+        xDrive(1100);
 
 
     }
@@ -160,7 +96,7 @@ public class mRed1 extends LinearOpMode {
         R1.setPower(R1speed);
         R2.setPower(R2speed);
 
-        while (opModeIsActive() && F1.isBusy()){
+        while (opModeIsActive() && F1.isBusy() && R2.isBusy()){
             telemetry.addData("Status", "encoder test");
             telemetry.addData("Encoder Position", "F1: "+F1.getCurrentPosition()+"  F2: "+F2.getCurrentPosition());
             telemetry.addData("Encoder Position", "R1: "+R1.getCurrentPosition()+"  R2: "+R2.getCurrentPosition());
